@@ -1,4 +1,6 @@
-const BASE = '/api'
+// In production, API is served from the same origin (no /api prefix needed)
+// In dev, Vite proxies /api → localhost:8000
+const BASE = import.meta.env.PROD ? '' : '/api'
 
 export async function getSummary(days = 30, source = '', department = '') {
   const params = new URLSearchParams({ days })

@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: ai-roi-tracker
+    runtime: docker
+    dockerfilePath: ./ai-roi-tracker/Dockerfile
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8000
