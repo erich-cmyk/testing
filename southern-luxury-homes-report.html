@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Southern Luxury Homes — SEO Performance Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#0d0d0d;color:#e8e0d0;min-height:100vh}
+  .hero{background:linear-gradient(135deg,#0d0d0d 0%,#1a1208 50%,#0d0d0d 100%);padding:70px 60px 50px;border-bottom:1px solid #2a2010;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(196,155,60,0.08) 0%,transparent 70%);pointer-events:none}
+  .logo-area{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+  .logo-icon{width:48px;height:48px;background:linear-gradient(135deg,#c49b3c,#e8c96a);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#0d0d0d;font-family:'Playfair Display',serif}
+  .logo-text{font-family:'Playfair Display',serif;font-size:18px;color:#c49b3c;letter-spacing:2px;text-transform:uppercase}
+  h1{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;line-height:1.1;color:#fff;margin-bottom:12px}
+  h1 span{color:#c49b3c}
+  .subtitle{font-size:15px;color:#8a7a5a;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+  .date-range{font-size:14px;color:#6a5a3a;margin-top:8px}
+  .container{max-width:1100px;margin:0 auto;padding:0 40px}
+  .section{padding:50px 60px}
+  .section-alt{background:#111108}
+  h2{font-family:'Playfair Display',serif;font-size:28px;color:#c49b3c;margin-bottom:8px}
+  .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#5a4a2a;margin-bottom:6px}
+  .divider{width:60px;height:2px;background:linear-gradient(90deg,#c49b3c,transparent);margin:14px 0 30px}
+
+  /* STAT CARDS */
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:10px}
+  .stat-card{background:#161410;border:1px solid #2a2010;border-radius:12px;padding:24px 20px;position:relative;overflow:hidden}
+  .stat-card.gold{border-color:#c49b3c40;background:linear-gradient(135deg,#1a1408,#161006)}
+  .stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#c49b3c,transparent)}
+  .stat-card.gold::after{background:linear-gradient(90deg,#e8c96a,#c49b3c)}
+  .stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#5a4a2a;margin-bottom:10px}
+  .stat-value{font-family:'Playfair Display',serif;font-size:38px;color:#fff;line-height:1}
+  .stat-value.gold{color:#c49b3c}
+  .stat-sub{font-size:12px;color:#4a3a1a;margin-top:8px}
+  .stat-badge{display:inline-block;background:#1a2a10;border:1px solid #2a4a1a;color:#4aaa2a;font-size:11px;padding:3px 8px;border-radius:20px;margin-top:8px;font-weight:600}
+
+  /* TOP 10 TABLE */
+  .top10-grid{display:grid;gap:10px;margin-top:10px}
+  .kw-row{display:grid;grid-template-columns:32px 1fr 80px 80px 80px 90px;align-items:center;gap:12px;background:#161410;border:1px solid #2a2010;border-radius:10px;padding:14px 18px;transition:border-color .2s}
+  .kw-row:hover{border-color:#c49b3c40}
+  .kw-row.top3{border-left:3px solid #c49b3c;background:linear-gradient(90deg,#1a1408,#161410)}
+  .rank{font-family:'Playfair Display',serif;font-size:18px;color:#3a2a0a;font-weight:700}
+  .rank.top3{color:#c49b3c}
+  .kw-name{font-size:14px;color:#d8c8a0;font-weight:500}
+  .kw-meta{font-size:11px;color:#4a3a1a;margin-top:2px}
+  .col-val{text-align:right;font-size:13px;color:#a89060}
+  .col-val.highlight{color:#e8c96a;font-weight:600}
+  .col-head{display:grid;grid-template-columns:32px 1fr 80px 80px 80px 90px;gap:12px;padding:8px 18px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#3a2a0a;margin-bottom:4px}
+  .pos-pill{display:inline-block;background:#1a2010;border:1px solid #2a3a10;color:#6aaa3a;font-size:12px;padding:3px 10px;border-radius:20px;font-weight:700;text-align:center}
+  .pos-pill.great{background:#1a1a08;border-color:#3a3a10;color:#c49b3c}
+
+  /* MOVERS */
+  .movers-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px}
+  .mover-card{background:#161410;border:1px solid #2a2010;border-radius:12px;padding:20px}
+  .mover-kw{font-size:14px;color:#d8c8a0;font-weight:500;margin-bottom:10px}
+  .mover-track{display:flex;align-items:center;gap:12px}
+  .pos-from{font-size:13px;color:#4a3a1a;background:#111;border-radius:6px;padding:4px 10px}
+  .arrow-area{flex:1;height:2px;background:#2a2010;position:relative}
+  .arrow-area::after{content:'▶';position:absolute;right:-6px;top:-8px;color:#c49b3c;font-size:12px}
+  .pos-to{font-size:15px;font-weight:700;color:#4aaa2a;background:#0d1a08;border:1px solid #1a3a10;border-radius:6px;padding:4px 12px}
+  .gain-badge{margin-left:auto;font-size:12px;color:#4aaa2a;font-weight:700;background:#0d1a08;border:1px solid #1a3a10;padding:3px 10px;border-radius:20px}
+  .mover-card.mega .mover-kw{color:#e8c96a}
+  .mover-card.mega{border-color:#c49b3c30;background:linear-gradient(135deg,#1a1408,#161410)}
+
+  /* OPPORTUNITY */
+  .opp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
+  .opp-card{background:#161410;border:1px solid #2a2010;border-radius:12px;padding:20px}
+  .opp-kw{font-size:13px;color:#d8c8a0;font-weight:600;margin-bottom:12px;min-height:36px}
+  .opp-stats{display:flex;gap:10px}
+  .opp-stat{flex:1;text-align:center;background:#111;border-radius:8px;padding:8px 4px}
+  .opp-stat-val{font-size:18px;font-weight:700;color:#c49b3c;font-family:'Playfair Display',serif}
+  .opp-stat-lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#3a2a0a;margin-top:2px}
+
+  /* MONTHLY TREND */
+  .trend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:10px}
+  .trend-card{background:#161410;border:1px solid #2a2010;border-radius:12px;padding:20px;text-align:center}
+  .trend-month{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#4a3a1a;margin-bottom:8px}
+  .trend-clicks{font-family:'Playfair Display',serif;font-size:36px;color:#fff;line-height:1}
+  .trend-imp{font-size:12px;color:#4a3a1a;margin-top:6px}
+  .trend-bar{height:4px;background:#2a2010;border-radius:2px;margin-top:12px;overflow:hidden}
+  .trend-fill{height:100%;background:linear-gradient(90deg,#c49b3c,#e8c96a);border-radius:2px}
+  .trend-card.best{border-color:#c49b3c40;background:linear-gradient(135deg,#1a1408,#161006)}
+  .trend-card.best .trend-month{color:#c49b3c}
+
+  /* BRANDED */
+  .brand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:10px}
+  .brand-row{display:flex;justify-content:space-between;align-items:center;background:#161410;border:1px solid #2a2010;border-radius:10px;padding:14px 18px}
+  .brand-kw{font-size:13px;color:#c8b880}
+  .brand-stats{display:flex;gap:20px;align-items:center}
+  .brand-stat{text-align:right}
+  .brand-stat-val{font-size:14px;font-weight:600;color:#e8c96a}
+  .brand-stat-lbl{font-size:10px;color:#3a2a0a}
+
+  /* RECOMMENDATIONS */
+  .rec-grid{display:grid;gap:12px;margin-top:10px}
+  .rec-card{display:flex;gap:18px;background:#161410;border:1px solid #2a2010;border-radius:12px;padding:20px}
+  .rec-num{font-family:'Playfair Display',serif;font-size:28px;color:#2a2010;font-weight:700;min-width:36px;line-height:1}
+  .rec-content h4{font-size:14px;color:#e8c96a;font-weight:600;margin-bottom:6px}
+  .rec-content p{font-size:13px;color:#7a6a4a;line-height:1.6}
+
+  /* FOOTER */
+  .footer{padding:30px 60px;border-top:1px solid #1a1208;display:flex;justify-content:space-between;align-items:center}
+  .footer-brand{font-family:'Playfair Display',serif;color:#3a2a0a;font-size:14px}
+  .footer-note{font-size:11px;color:#2a1a0a}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="logo-area">
+    <div class="logo-icon">S</div>
+    <div class="logo-text">Southern Luxury Homes</div>
+  </div>
+  <div class="subtitle">Google Search Console</div>
+  <h1>SEO Performance <span>Report</span></h1>
+  <div class="date-range">3-Month Review: December 25, 2025 – March 24, 2026 &nbsp;|&nbsp; Report Generated: March 26, 2026</div>
+</div>
+
+<!-- OVERVIEW STATS -->
+<div class="section">
+  <div class="section-label">At a Glance</div>
+  <h2>Performance Overview</h2>
+  <div class="divider"></div>
+  <div class="stat-grid">
+    <div class="stat-card gold">
+      <div class="stat-label">Primary Keyword Position</div>
+      <div class="stat-value gold">#2.18</div>
+      <div class="stat-sub">"southern luxury homes"</div>
+      <div class="stat-badge">↑ Improved from #2.67</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">3-Month Total Clicks</div>
+      <div class="stat-value">295</div>
+      <div class="stat-sub">Across all keywords</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">3-Month Impressions</div>
+      <div class="stat-value">18,314</div>
+      <div class="stat-sub">Total search appearances</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Keywords Ranked Top 10</div>
+      <div class="stat-value gold">14+</div>
+      <div class="stat-sub">Page 1 presence</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOP 10 KEYWORDS -->
+<div class="section section-alt">
+  <div class="section-label">Ranking Now</div>
+  <h2>Top 10 Keywords by Position</h2>
+  <div class="divider"></div>
+  <div class="col-head">
+    <div></div><div>Keyword</div><div style="text-align:right">Clicks</div><div style="text-align:right">Impressions</div><div style="text-align:right">CTR</div><div style="text-align:right">Position</div>
+  </div>
+  <div class="top10-grid">
+
+    <div class="kw-row top3">
+      <div class="rank top3">1</div>
+      <div><div class="kw-name">luxury home builder greensboro</div><div class="kw-meta">Local builder — Greensboro, GA</div></div>
+      <div class="col-val">—</div><div class="col-val">10</div><div class="col-val">—</div>
+      <div class="col-val highlight"><span class="pos-pill great">#1.0</span></div>
+    </div>
+
+    <div class="kw-row top3">
+      <div class="rank top3">2</div>
+      <div><div class="kw-name">kevin aycock</div><div class="kw-meta">Branded — principal name</div></div>
+      <div class="col-val highlight">7</div><div class="col-val">92</div><div class="col-val highlight">7.61%</div>
+      <div class="col-val highlight"><span class="pos-pill great">#1.11</span></div>
+    </div>
+
+    <div class="kw-row top3">
+      <div class="rank top3">3</div>
+      <div><div class="kw-name">southern luxury homes</div><div class="kw-meta">Primary brand keyword</div></div>
+      <div class="col-val highlight">99</div><div class="col-val">552</div><div class="col-val highlight">17.93%</div>
+      <div class="col-val highlight"><span class="pos-pill great">#2.18</span></div>
+    </div>
+
+    <div class="kw-row">
+      <div class="rank">4</div>
+      <div><div class="kw-name">custom home builder near me</div><div class="kw-meta">High-intent buyer keyword</div></div>
+      <div class="col-val">—</div><div class="col-val">73</div><div class="col-val">—</div>
+      <div class="col-val"><span class="pos-pill">#2.46</span></div>
+    </div>
+
+    <div class="kw-row">
+      <div class="rank">5</div>
+      <div><div class="kw-name">custom homes greensboro ga</div><div class="kw-meta">Local custom homes — Greensboro</div></div>
+      <div class="col-val">—</div><div class="col-val">153</div><div class="col-val">—</div>
+      <div class="col-val"><span class="pos-pill">#2.81 → #2.0</span></div>
+    </div>
+
+    <div class="kw-row">
+      <div class="rank">6</div>
+      <div><div class="kw-name">southern luxury real estate in georgia</div><div class="kw-meta">Branded real estate term</div></div>
+      <div class="col-val">—</div><div class="col-val">14</div><div class="col-val">—</div>
+      <div class="col-val"><span class="pos-pill">#3.07</span></div>
+    </div>
+
+    <div class="kw-row">
+      <div class="rank">7</div>
+      <div><div class="kw-name">home builder greensboro builder ga</div><div class="kw-meta">Local builder — high impression count</div></div>
+      <div class="col-val">—</div><div class="col-val">153</div><div class="col-val">—</div>
+      <div class="col-val"><span class="pos-pill">#3.11</span></div>
+    </div>
+
+    <div class="kw-row">
+      <div class="rank">8</div>
+      <div><div class="kw-name">custom homes greensboro</div><div class="kw-meta">Greensboro custom homes market</div></div>
+      <div class="col-val">—</div><div class="col-val">124</div><div class="col-val">—</div>
+      <div class="col-val"><span class="pos-pill">#3.85 → #2.0</span></div>
+    </div>
+
+    <div class="kw-row">
+      <div class="rank">9</div>
+      <div><div class="kw-name">aycock properties</div><div class="kw-meta">Branded — company properties</div></div>
+      <div class="col-val">—</div><div class="col-val">6</div><div class="col-val">—</div>
+      <div class="col-val"><span class="pos-pill">#6.33</span></div>
+    </div>
+
+    <div class="kw-row">
+      <div class="rank">10</div>
+      <div><div class="kw-name">lake oconee luxury home builder</div><div class="kw-meta">High-value lake market keyword</div></div>
+      <div class="col-val">—</div><div class="col-val">53</div><div class="col-val">—</div>
+      <div class="col-val"><span class="pos-pill">#5.58</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BIGGEST MOVERS UP -->
+<div class="section">
+  <div class="section-label">Momentum</div>
+  <h2>Biggest Ranking Increases This Month</h2>
+  <div class="divider"></div>
+  <div class="movers-grid">
+
+    <div class="mover-card mega">
+      <div class="mover-kw">atlanta luxury home builder</div>
+      <div class="mover-track">
+        <div class="pos-from">#67.84</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#38.30</div>
+        <div class="gain-badge">+29.5 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card mega">
+      <div class="mover-kw">luxury home builder near me</div>
+      <div class="mover-track">
+        <div class="pos-from">#56.64</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#38.69</div>
+        <div class="gain-badge">+17.9 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card mega">
+      <div class="mover-kw">custom home builder greensboro</div>
+      <div class="mover-track">
+        <div class="pos-from">#23.63</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#10.07</div>
+        <div class="gain-badge">+13.6 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card mega">
+      <div class="mover-kw">greensboro home builder</div>
+      <div class="mover-track">
+        <div class="pos-from">#24.86</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#11.69</div>
+        <div class="gain-badge">+13.2 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card">
+      <div class="mover-kw">luxury lakefront homes builder</div>
+      <div class="mover-track">
+        <div class="pos-from">#55.91</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#43.00</div>
+        <div class="gain-badge">+12.9 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card">
+      <div class="mover-kw">luxury home builders in atlanta ga</div>
+      <div class="mover-track">
+        <div class="pos-from">#58.85</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#49.26</div>
+        <div class="gain-badge">+9.6 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card">
+      <div class="mover-kw">luxury house builders</div>
+      <div class="mover-track">
+        <div class="pos-from">#30.62</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#21.74</div>
+        <div class="gain-badge">+8.9 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card">
+      <div class="mover-kw">home builder greensboro</div>
+      <div class="mover-track">
+        <div class="pos-from">#16.19</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#7.53</div>
+        <div class="gain-badge">+8.7 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card">
+      <div class="mover-kw">luxury custom home builders atlanta</div>
+      <div class="mover-track">
+        <div class="pos-from">#58.48</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#50.19</div>
+        <div class="gain-badge">+8.3 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card">
+      <div class="mover-kw">custom homes in greensboro</div>
+      <div class="mover-track">
+        <div class="pos-from">#21.19</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#13.75</div>
+        <div class="gain-badge">+7.4 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card">
+      <div class="mover-kw">luxury home builders atlanta</div>
+      <div class="mover-track">
+        <div class="pos-from">#51.98</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#45.27</div>
+        <div class="gain-badge">+6.7 spots</div>
+      </div>
+    </div>
+
+    <div class="mover-card">
+      <div class="mover-kw">custom builders greensboro</div>
+      <div class="mover-track">
+        <div class="pos-from">#11.77</div>
+        <div class="arrow-area"></div>
+        <div class="pos-to">#5.75</div>
+        <div class="gain-badge">+6.0 spots</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OPPORTUNITY KEYWORDS -->
+<div class="section section-alt">
+  <div class="section-label">Growth Potential</div>
+  <h2>High-Opportunity Keywords Already on Page 1</h2>
+  <div class="divider"></div>
+  <div class="opp-grid">
+
+    <div class="opp-card">
+      <div class="opp-kw">custom home builder lake oconee</div>
+      <div class="opp-stats">
+        <div class="opp-stat"><div class="opp-stat-val">240</div><div class="opp-stat-lbl">Impressions</div></div>
+        <div class="opp-stat"><div class="opp-stat-val">#10</div><div class="opp-stat-lbl">Position</div></div>
+        <div class="opp-stat"><div class="opp-stat-val" style="color:#4aaa2a">High</div><div class="opp-stat-lbl">Potential</div></div>
+      </div>
+    </div>
+
+    <div class="opp-card">
+      <div class="opp-kw">home builder greensboro builder ga</div>
+      <div class="opp-stats">
+        <div class="opp-stat"><div class="opp-stat-val">153</div><div class="opp-stat-lbl">Impressions</div></div>
+        <div class="opp-stat"><div class="opp-stat-val">#3</div><div class="opp-stat-lbl">Position</div></div>
+        <div class="opp-stat"><div class="opp-stat-val" style="color:#4aaa2a">High</div><div class="opp-stat-lbl">Potential</div></div>
+      </div>
+    </div>
+
+    <div class="opp-card">
+      <div class="opp-kw">custom homes greensboro ga</div>
+      <div class="opp-stats">
+        <div class="opp-stat"><div class="opp-stat-val">153</div><div class="opp-stat-lbl">Impressions</div></div>
+        <div class="opp-stat"><div class="opp-stat-val">#3.85</div><div class="opp-stat-lbl">Position</div></div>
+        <div class="opp-stat"><div class="opp-stat-val" style="color:#4aaa2a">High</div><div class="opp-stat-lbl">Potential</div></div>
+      </div>
+    </div>
+
+    <div class="opp-card">
+      <div class="opp-kw">custom builders greensboro</div>
+      <div class="opp-stats">
+        <div class="opp-stat"><div class="opp-stat-val">177</div><div class="opp-stat-lbl">Impressions</div></div>
+        <div class="opp-stat"><div class="opp-stat-val">#5.75</div><div class="opp-stat-lbl">Position</div></div>
+        <div class="opp-stat"><div class="opp-stat-val" style="color:#4aaa2a">High</div><div class="opp-stat-lbl">Potential</div></div>
+      </div>
+    </div>
+
+    <div class="opp-card">
+      <div class="opp-kw">custom home builder near me</div>
+      <div class="opp-stats">
+        <div class="opp-stat"><div class="opp-stat-val">73</div><div class="opp-stat-lbl">Impressions</div></div>
+        <div class="opp-stat"><div class="opp-stat-val">#1.0</div><div class="opp-stat-lbl">Position</div></div>
+        <div class="opp-stat"><div class="opp-stat-val" style="color:#4aaa2a">CTR</div><div class="opp-stat-lbl">Fix Needed</div></div>
+      </div>
+    </div>
+
+    <div class="opp-card">
+      <div class="opp-kw">lake oconee luxury home builder</div>
+      <div class="opp-stats">
+        <div class="opp-stat"><div class="opp-stat-val">53</div><div class="opp-stat-lbl">Impressions</div></div>
+        <div class="opp-stat"><div class="opp-stat-val">#5.58</div><div class="opp-stat-lbl">Position</div></div>
+        <div class="opp-stat"><div class="opp-stat-val" style="color:#4aaa2a">High</div><div class="opp-stat-lbl">Potential</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MONTHLY TREND -->
+<div class="section">
+  <div class="section-label">Month by Month</div>
+  <h2>Click Trend Over Time</h2>
+  <div class="divider"></div>
+  <div class="trend-grid">
+    <div class="trend-card">
+      <div class="trend-month">Dec 25–31</div>
+      <div class="trend-clicks">17</div>
+      <div class="trend-imp">900 impressions</div>
+      <div class="trend-bar"><div class="trend-fill" style="width:14%"></div></div>
+    </div>
+    <div class="trend-card">
+      <div class="trend-month">January 2026</div>
+      <div class="trend-clicks">96</div>
+      <div class="trend-imp">6,127 impressions</div>
+      <div class="trend-bar"><div class="trend-fill" style="width:78%"></div></div>
+    </div>
+    <div class="trend-card best">
+      <div class="trend-month">February 2026 ★</div>
+      <div class="trend-clicks">123</div>
+      <div class="trend-imp">6,982 impressions</div>
+      <div class="trend-bar"><div class="trend-fill" style="width:100%"></div></div>
+    </div>
+    <div class="trend-card">
+      <div class="trend-month">March 1–24</div>
+      <div class="trend-clicks">59</div>
+      <div class="trend-imp">4,305 impressions</div>
+      <div class="trend-bar"><div class="trend-fill" style="width:48%"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- BRANDED KEYWORDS -->
+<div class="section section-alt">
+  <div class="section-label">Brand Strength</div>
+  <h2>Branded Keyword Performance</h2>
+  <div class="divider"></div>
+  <div class="brand-grid">
+    <div class="brand-row">
+      <div class="brand-kw">southern luxury homes</div>
+      <div class="brand-stats">
+        <div class="brand-stat"><div class="brand-stat-val">99</div><div class="brand-stat-lbl">Clicks</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">17.93%</div><div class="brand-stat-lbl">CTR</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">#2.18</div><div class="brand-stat-lbl">Position</div></div>
+      </div>
+    </div>
+    <div class="brand-row">
+      <div class="brand-kw">kevin aycock</div>
+      <div class="brand-stats">
+        <div class="brand-stat"><div class="brand-stat-val">7</div><div class="brand-stat-lbl">Clicks</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">7.61%</div><div class="brand-stat-lbl">CTR</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">#1.11</div><div class="brand-stat-lbl">Position</div></div>
+      </div>
+    </div>
+    <div class="brand-row">
+      <div class="brand-kw">southern luxury</div>
+      <div class="brand-stats">
+        <div class="brand-stat"><div class="brand-stat-val">7</div><div class="brand-stat-lbl">Clicks</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">2.99%</div><div class="brand-stat-lbl">CTR ↑</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">#8.54</div><div class="brand-stat-lbl">Position</div></div>
+      </div>
+    </div>
+    <div class="brand-row">
+      <div class="brand-kw">southern luxury real estate team</div>
+      <div class="brand-stats">
+        <div class="brand-stat"><div class="brand-stat-val">0</div><div class="brand-stat-lbl">Clicks</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">52</div><div class="brand-stat-lbl">Impressions</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">#8.39</div><div class="brand-stat-lbl">Position</div></div>
+      </div>
+    </div>
+    <div class="brand-row">
+      <div class="brand-kw">southern luxury design</div>
+      <div class="brand-stats">
+        <div class="brand-stat"><div class="brand-stat-val">0</div><div class="brand-stat-lbl">Clicks</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">53</div><div class="brand-stat-lbl">Impressions</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">#9.70</div><div class="brand-stat-lbl">Position</div></div>
+      </div>
+    </div>
+    <div class="brand-row">
+      <div class="brand-kw">aycock properties</div>
+      <div class="brand-stats">
+        <div class="brand-stat"><div class="brand-stat-val">0</div><div class="brand-stat-lbl">Clicks</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">6</div><div class="brand-stat-lbl">Impressions</div></div>
+        <div class="brand-stat"><div class="brand-stat-val">#6.33</div><div class="brand-stat-lbl">Position</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECOMMENDATIONS -->
+<div class="section">
+  <div class="section-label">Next Steps</div>
+  <h2>Recommendations to Keep Growing</h2>
+  <div class="divider"></div>
+  <div class="rec-grid">
+    <div class="rec-card">
+      <div class="rec-num">01</div>
+      <div class="rec-content">
+        <h4>Capitalize on Atlanta Momentum</h4>
+        <p>"Atlanta luxury home builder" jumped an incredible 29.5 positions in a single month. Double down with Atlanta-specific landing page content to push this keyword onto page 1 and start driving real buyer traffic from the Atlanta market.</p>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">02</div>
+      <div class="rec-content">
+        <h4>Unlock "custom home builder lake oconee" — 240 Impressions Waiting</h4>
+        <p>This keyword appears 240 times per month at position #10 with zero clicks. It's on the edge of page 1 — a refresh of the page title and meta description targeting this keyword could turn those impressions into real inquiries.</p>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">03</div>
+      <div class="rec-content">
+        <h4>Push Greensboro Keywords Fully Onto Page 1</h4>
+        <p>"Greensboro home builder" is at position #11.69 and climbing fast. With a dedicated Greensboro builder landing page, this keyword — and several others like "greensboro custom home builders" — can all land on page 1 together.</p>
+      </div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">04</div>
+      <div class="rec-content">
+        <h4>Optimize CTR for Existing #1 Rankings</h4>
+        <p>"Luxury home builder greensboro" and "custom home builder near me" are both ranking #1 but generating zero clicks. Rewriting the meta title and description for these pages to be more compelling and action-oriented will convert these top rankings into actual leads.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Southern Luxury Homes &nbsp;|&nbsp; southernluxury.com</div>
+  <div class="footer-note">Data Source: Google Search Console &nbsp;|&nbsp; Dec 25, 2025 – Mar 24, 2026</div>
+</div>
+
+</body>
+</html>
